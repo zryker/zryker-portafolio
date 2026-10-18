@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>zRyker - RykerGamer</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #050b14 0%, #0a192f 100%);
+            color: #e6f1ff;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        header {
+            text-align: center;
+            padding: 40px 20px 20px 20px;
+            background: rgba(5, 11, 20, 0.8);
+            border-bottom: 2px solid #00d2ff;
+        }
+
+        header h1 {
+            color: #00d2ff;
+            font-size: 2.2rem;
+            text-shadow: 0 0 10px rgba(0, 210, 255, 0.5);
+            margin-bottom: 5px;
+        }
+
+        header p {
+            color: #8892b0;
+            font-size: 1.1rem;
+            font-weight: 500;
+        }
+
+        nav {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 10px;
+            padding: 15px;
+            background: #0d1b2a;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.5);
+        }
+
+        nav button {
+            background: transparent;
+            border: 1px solid #00d2ff;
+            color: #00d2ff;
+            padding: 8px 16px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.3s ease;
+        }
+
+        nav button:hover, nav button.active {
+            background: #00d2ff;
+            color: #050b14;
+            box-shadow: 0 0 10px rgba(0, 210, 255, 0.6);
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+            width: 90%;
+            flex-grow: 1;
+        }
+
+        .section {
+            display: none;
+            background: rgba(13, 27, 42, 0.7);
+            padding: 25px;
+            border-radius: 12px;
+            border: 1px solid rgba(0, 210, 255, 0.2);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.4);
+            animation: fadeIn 0.4s ease-in-out;
+        }
+
+        .section.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        h2 {
+            color: #00d2ff;
+            margin-bottom: 15px;
+            border-bottom: 1px solid rgba(0, 210, 255, 0.3);
+            padding-bottom: 8px;
+        }
+
+        h3 {
+            color: #64ffda;
+            margin-top: 15px;
+            margin-bottom: 5px;
+        }
+
+        p {
+            line-height: 1.6;
+            color: #cca6c12;
+            margin-bottom: 12px;
+        }
+
+        ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        ul li {
+            background: rgba(255, 255, 255, 0.03);
+            margin: 10px 0;
+            padding: 12px;
+            border-left: 3px solid #00d2ff;
+            border-radius: 4px;
+        }
+
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 15px;
+            margin-top: 15px;
+        }
+
+        .card {
+            background: rgba(255, 255, 255, 0.04);
+            padding: 15px;
+            border-radius: 8px;
+            border: 1px solid rgba(0, 210, 255, 0.1);
+        }
+
+        .discord-box {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: #1e1f29;
+            padding: 10px 20px;
+            border-radius: 8px;
+            border: 1px solid #5865f2;
+            margin: 15px 0;
+        }
+
+        .discord-box span {
+            color: #fff;
+            font-weight: bold;
+            font-family: monospace;
+            font-size: 1.1rem;
+        }
+
+        .copy-btn {
+            background: #5865f2;
+            color: white;
+            border: none;
+            padding: 6px 12px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: background 0.2s;
+        }
+
+        .copy-btn:hover {
+            background: #4752c4;
+        }
+
+        footer {
+            text-align: center;
+            padding: 20px;
+            background: #050b14;
+            color: #8892b0;
+            font-size: 0.9rem;
+            border-top: 1px solid rgba(0, 210, 255, 0.2);
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>zRyker - RykerGamer</h1>
+        <p>Developer y Staff de Minecraft y Discord</p>
+    </header>
+
+    <nav>
+        <button class="nav-btn active" onclick="showSection('inicio', this)">Inicio</button>
+        <button class="nav-btn" onclick="showSection('sobre-mi', this)">Sobre mí</button>
+        <button class="nav-btn" onclick="showSection('servidores', this)">Servidores</button>
+        <button class="nav-btn" onclick="showSection('habilidades', this)">Habilidades</button>
+        <button class="nav-btn" onclick="showSection('contacto', this)">Contacto</button>
+    </nav>
+
+    <div class="container">
+
+        <!-- INICIO -->
+        <section id="inicio" class="section active">
+            <h2>Hola, zRyker / RykerGamer</h2>
+            <p>Soy Developer y Staff de servidores de Minecraft. Llevo 4 años en esto y he gestionado 15 servidores.</p>
+            <p>Me gusta ayudar a los jugadores, arreglar lo que se rompe y que el servidor funcione bien. Mi nombre real es Juan Esteban.</p>
+            <p>He trabajado en moderación, plugins, configuración de servidores y revisiones SS, y he ayudado con problemas normales y graves.</p>
+        </section>
+
+        <!-- SOBRE MI -->
+        <section id="sobre-mi" class="section">
+            <h2>Sobre mí</h2>
+            <p>Soy Juan Esteban, aunque en los servidores me conocen como RykerGamer o zRyker. He sido staff en varios servidores y tengo 4 años de experiencia, tanto en moderación como en configuración de plugins.</p>
+            <p>Me gusta ayudar, ya sea como staff o como developer. Mi recorrido me dio mucha experiencia ayudando con problemas normales y graves, y eso me ha servido para trabajar con calma cuando algo se complica.</p>
+            
+            <h3>Staff y developer</h3>
+            <p>Ayudo desde los dos lados: la moderación del día a día y la parte técnica de plugins y configuración.</p>
+
+            <ul>
+                <li><strong>Soporte a los usuarios:</strong> Resuelvo dudas y reportes de los jugadores.</li>
+                <li><strong>Bugs:</strong> Arreglo bugs dentro de los servidores.</li>
+                <li><strong>Problemas entre jugadores:</strong> Manejo conflictos, incluidos los que tienen que ver con hacks.</li>
+                <li><strong>Trabajo en equipo:</strong> Soy parte de un staff team y sé trabajar con el resto del equipo.</li>
+            </ul>
+
+            <p style="margin-top: 15px;"><em>Soy un staff responsable, amable y justo, tanto en problemas graves como en los que no lo son tanto.</em></p>
+        </section>
+
+        <!-- SERVIDORES -->
+        <section id="servidores" class="section">
+            <h2>Servidores</h2>
+            <p>He gestionado 15 servidores en total y en ellos he trabajado como staff. Estos son tres de los que más puedo mencionar:</p>
+            
+            <div class="card-grid">
+                <div class="card">
+                    <h3>SylenMC</h3>
+                    <p><strong>Rango:</strong> Founder</p>
+                </div>
+                <div class="card">
+                    <h3>SurCraft</h3>
+                    <p><strong>Rango:</strong> Admin</p>
+                </div>
+                <div class="card">
+                    <h3>SvopMC</h3>
+                    <p><strong>Rango:</strong> Developer</p>
+                </div>
+            </div>
+
+            <p style="margin-top: 20px;">En todos he ayudado con moderación, dudas y reportes de los usuarios, bugs y problemas entre jugadores.</p>
+            <p><strong>En total: 15 servidores y 4 años de experiencia.</strong></p>
+        </section>
+
+        <!-- HABILIDADES -->
+        <section id="habilidades" class="section">
+            <h2>Habilidades</h2>
+            <p>Combino la parte de staff con la parte técnica, así que puedo moderar un servidor y también configurarlo.</p>
+
+            <ul>
+                <li><strong>Moderación:</strong> Atender reportes, mantener el orden y tratar a todos los jugadores de forma justa.</li>
+                <li><strong>Configuración de plugins:</strong> Dejar los plugins funcionando como el servidor los necesita.</li>
+                <li><strong>Configuración de servidores:</strong> Ajustar y dejar listo el servidor para que funcione bien.</li>
+                <li><strong>Soporte:</strong> Solucionar dudas y reportes de los usuarios.</li>
+                <li><strong>Bugs:</strong> Encontrar y arreglar errores dentro del servidor.</li>
+                <li><strong>Conflictos:</strong> Manejar problemas entre jugadores, también cuando hay hacks de por medio.</li>
+                <li><strong>SS:</strong> Revisión de PC a jugadores con hacks. Mi nivel es avanzado.</li>
+            </ul>
+
+            <p style="margin-top: 15px;"><strong>Responsable, amable y justo.</strong></p>
+        </section>
+
+        <!-- CONTACTO -->
+        <section id="contacto" class="section">
+            <h2>Contacto</h2>
+            <p>Si tu servidor necesita staff o un developer, escríbeme por Discord:</p>
+
+            <div class="discord-box">
+                <span id="discord-user">rykeryt.25</span>
+                <button class="copy-btn" onclick="copyDiscord()">Copiar</button>
+            </div>
+
+            <p>Puedo ayudarte con moderación, plugins y configuración o con una revisión SS.</p>
+            <p><strong>Gracias por pasar.</strong></p>
+        </section>
+
+    </div>
+
+    <footer>
+        © zRyker
+    </footer>
+
+    <script>
+        function showSection(id, btn) {
+            // Ocultar todas las secciones
+            let sections = document.querySelectorAll('.section');
+            sections.forEach(sec => sec.classList.remove('active'));
+
+            // Quitar clase activa a todos los botones
+            let buttons = document.querySelectorAll('.nav-btn');
+            buttons.forEach(b => b.classList.remove('active'));
+
+            // Mostrar la sección seleccionada y activar botón
+            document.getElementById(id).classList.add('active');
+            btn.classList.add('active');
+        }
+
+        function copyDiscord() {
+            let discordText = document.getElementById('discord-user').innerText;
+            navigator.clipboard.writeText(discordText).then(() => {
+                alert('¡Nombre de usuario de Discord copiado!');
+            }).catch(err => {
+                // Alternativa para navegadores que bloqueen el clipboard en WebView
+                let tempInput = document.createElement("input");
+                tempInput.value = discordText;
+                document.body.appendChild(tempInput);
+                tempInput.select();
+                document.execCommand("copy");
+                document.body.removeChild(tempInput);
+                alert('¡Nombre de usuario de Discord copiado!');
+            });
+        }
+    </script>
+
+</body>
+</html>
